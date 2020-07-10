@@ -69,4 +69,17 @@ class ToyRobotTest extends TestCase
     $currentPosition = $this->robot->getCurrentPosition();
     $this->assertEquals(['x' => 1, 'y' => 2, 'face' => 'EAST'], $currentPosition);
    }
+
+   /** @test */
+   public function can_move_north_based_on_movable_postion()
+   {
+       $testPos = ['x' => 0, 'y' => 1, 'face' => 'NORTH'];
+       $this->robot->setCurrentPosition($testPos);
+       $this->assertEquals($testPos, $this->robot->getCurrentPosition());
+       
+       $newPos = $this->robot->canMove();
+       $expectPos = ['x'=>0, 'y' => 2, 'face' => 'NORTH'];
+       $this->assertEquals($expectPos, $newPos);
+   }
+   
 }
