@@ -3,14 +3,17 @@ require_once dirname(__DIR__).'/vendor/autoload.php';
 
 // Read file and get commands
 $console = new App\Console;
-$commands = $console->readFile();
+$console->readFile();
 
-// Print all parsed commands
-$console->printCommands($commands);
+// Print all commands
+echo "All commands:\n------------------------\n";
+$console->printCommands($console->getCommands());
 
-// Trim commands to keep only valid commands starting from PLACE
+// Print sliced commands
+echo "\nSliced commands from 'PLACE':\n------------------------\n";
+$console->printCommands($console->getSlicedCommands());
 
-// Run trimmed commands
+// Run sliced commands
 
 
 // Print result

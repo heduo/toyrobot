@@ -41,10 +41,8 @@ class Console
             $hasPlaceCommand = $this->hasPlaceCommand($content);
 
             if ($hasPlaceCommand!==false) {
-                $this->slicedCommands = $this->stringToCommandsArray(substr($content, $hasPlaceCommand));
+                $this->slicedCommands = $this->stringToCommandsArray(substr($content, $hasPlaceCommand)); // slice commands and keep the part from PLACE command
                 $this->commands =  $this->stringToCommandsArray($content);
-
-                //return $commandsArray;
             }else{
                 throw new NoPlaceCommandException('No PLACE command found');
             }
@@ -84,11 +82,6 @@ class Console
             printf("Command %d : %s \n", $step, $command);
         }
         
-    }
-
-    public function sliceCommandsFromPlace(string $commands)
-    {
-        # code...
     }
 
     public function stringToCommandsArray(string $commands):array
