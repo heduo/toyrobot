@@ -1,7 +1,6 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use App\Console;
 use App\Exceptions\EmptyCommandsException;
 use App\Exceptions\InvalidTableSizeException;
 use App\Exceptions\NoPlaceCommandException;
@@ -10,13 +9,10 @@ use App\ToyRobot;
 class ToyRobotTest extends TestCase
 {
    protected $robot;
-   protected $console;
 
    protected function setUp():void
    {
-    $this->console = new Console;
-    $this->console->readFile();
-    $commands = $this->console->getSlicedCommands();
+    $commands = ['PLACE 1,2,EAST', 'MOVE', 'MOVE', 'LEFT', 'MOVE', 'REPORT'];
     $this->robot = new ToyRobot($commands);
    }
 
@@ -33,7 +29,8 @@ class ToyRobotTest extends TestCase
    public function throw_exception_when_table_size_is_invalid()
    {
        $this->expectException(InvalidTableSizeException::class);
-       $this->robot = new ToyRobot($this->console->getSlicedCommands(), 0);
+       $commands = $this->robot->getCommands();
+       $this->robot = new ToyRobot($commands, 0);
    }
 
     /** @test */
