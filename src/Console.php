@@ -75,12 +75,11 @@ class Console
 
     }
 
-    public function printCommands()
+    public function printCommands($commands)
     {
-        if ($this->commands) {
-           foreach ($this->commands as $step  => $command) {
-              printf("Command %d : %s \n", $step, $command);
-           }
+        foreach ($commands as $step  => $command) {
+            printf("Command %d : %s \n", $step, $command);
         }
+        
     }
 }
