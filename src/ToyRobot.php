@@ -25,11 +25,20 @@ class ToyRobot
        return $this->commands;
     }
 
+    public function getCurrentPosition()
+    {
+        return $this->currentPosition;
+    }
+
+    public function setCurrentPosition(array $position)
+    {
+        $this->currentPosition = $position;
+    }
+
     public function run()
     {
        // initialise current position with first PLACE command
        $this->initCurrentPosition($this->getCommands()[0]);
-
        // execute commands
 
         
@@ -65,7 +74,8 @@ class ToyRobot
 
     public function initCurrentPosition(string $command)
     {
-        $this->currentPosition = $this->parsePlaceCommand($command);
+        $initPosition = $this->parsePlaceCommand($command);
+        $this->setCurrentPosition($initPosition);
        
     }
 

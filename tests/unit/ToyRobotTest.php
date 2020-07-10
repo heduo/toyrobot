@@ -59,4 +59,14 @@ class ToyRobotTest extends TestCase
        $expect = ['x' => 1, 'y'=> 2, 'face'=> 'EAST' ];
        $this->assertEquals($expect, $cmd);
    }
+
+   /** @test */
+   public function can_init_current_position_with_correct_format_place_command()
+   {
+    $placeCommand = 'PLACE 1,2,EAST';
+    $this->robot = new ToyRobot([$placeCommand]);
+    $this->robot->initCurrentPosition($placeCommand);
+    $currentPosition = $this->robot->getCurrentPosition();
+    $this->assertEquals(['x' => 1, 'y' => 2, 'face' => 'EAST'], $currentPosition);
+   }
 }
