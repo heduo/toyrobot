@@ -1,0 +1,12 @@
+    MOVE
+    MOVE
+    LEFT
+    MOVE
+    REPORT
+
+    MOVE
+    MOVE
+    LEFT
+    MOVE
+    REPORT
+
