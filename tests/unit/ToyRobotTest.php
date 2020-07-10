@@ -50,5 +50,13 @@ class ToyRobotTest extends TestCase
        $this->robot = new ToyRobot(['MOVE', 'LEFT', 'MOVE']);
    }
 
-
+   /** @test */
+   public function parse_correct_format_place_command()
+   {
+       $placeCommand = 'PLACE 1,2,EAST';
+       $this->robot = new ToyRobot([$placeCommand]);
+       $cmd = $this->robot->parsePlaceCommand($placeCommand);
+       $expect = ['x' => 1, 'y'=> 2, 'face'=> 'EAST' ];
+       $this->assertEquals($expect, $cmd);
+   }
 }
