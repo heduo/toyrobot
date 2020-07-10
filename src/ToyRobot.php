@@ -177,6 +177,12 @@ class ToyRobot
         }
     }
 
+    public function report()
+    {
+        $pos = $this->currentPosition;
+        printf("\nReport Output: %d,%d,%s\n", $pos['x'], $pos['y'], $pos['face']);
+    }
+
     public function execute(string $command)
     {
         $cmd = explode(' ', $command);
@@ -196,7 +202,7 @@ class ToyRobot
                 $this->right();
                 break;
             case 'report':
-                # code...
+                $this->report();
                 break;
             default:
                 # code...

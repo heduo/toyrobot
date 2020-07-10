@@ -93,4 +93,26 @@ class ToyRobotTest extends TestCase
     $this->assertEquals($expectPos, $this->robot->getCurrentPosition());
    }
 
+   /** @test */
+   public function can_turn_right()
+   {
+    $testPos = ['x' => 0, 'y' => 1, 'face' => 'NORTH'];
+    $this->robot->setCurrentPosition($testPos);
+    
+    $this->robot->right();
+    $expectPos = ['x'=>0, 'y' => 1, 'face' => 'EAST'];
+    $this->assertEquals($expectPos, $this->robot->getCurrentPosition());
+   }
+
+   /** @test */
+   public function can_report()
+   {
+    $this->expectOutputString("\nReport Output: 0,1,NORTH\n");
+    
+    $testPos = ['x' => 0, 'y' => 1, 'face' => 'NORTH'];
+    $this->robot->setCurrentPosition($testPos);
+    $this->robot->report();
+    
+   }
+
 }
