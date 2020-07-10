@@ -74,4 +74,13 @@ class Console
       return strpos(strtolower($content), 'place');
 
     }
+
+    public function printCommands()
+    {
+        if ($this->commands) {
+           foreach ($this->commands as $step  => $command) {
+              printf("Command %d : %s \n", $step, $command);
+           }
+        }
+    }
 }

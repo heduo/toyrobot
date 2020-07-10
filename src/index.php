@@ -1,5 +1,6 @@
 <?php
-require_once '../vendor/autoload.php';
+require_once dirname(__DIR__).'/vendor/autoload.php';
 
 $console = new App\Console;
-$console->promp();
+$commands = $console->readFile();
+$console->printCommands();
