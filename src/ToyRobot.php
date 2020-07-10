@@ -113,7 +113,7 @@ class ToyRobot
     }
 
     /**
-     * Execute MOVE command
+     * Execute MOVE command and update current position
      *
      * @return void
      */
@@ -125,9 +125,56 @@ class ToyRobot
         }
     }
 
-    public function rotate(string $direction)
+    public function left()
     {
-        # code...
+        $face = $this->currentPosition['face'];
+
+        switch (strtoupper($face)) {
+            case 'NORTH':
+                $this->currentPosition['face'] = "WEST";
+                break;
+
+            case 'SOUTH':
+                $this->currentPosition['face'] = "EAST";
+                break;
+
+            case 'WEST':
+                $this->currentPosition['face'] = "SOUTH";
+                break;
+            case 'EAST':
+                $this->currentPosition['face'] = "NORTH";
+                break;
+
+            default:
+                throw new \Exception("Invalid Rotate Command");
+                break;
+        }
+    }
+
+    public function right()
+    {
+        $face = $this->currentPosition['face'];
+
+        switch (strtoupper($face)) {
+            case 'NORTH':
+                $this->currentPosition['face'] = "EAST";
+                break;
+
+            case 'SOUTH':
+                $this->currentPosition['face'] = "WEST";
+                break;
+
+            case 'WEST':
+                $this->currentPosition['face'] = "NORTH";
+                break;
+            case 'EAST':
+                $this->currentPosition['face'] = "SOUTH";
+                break;
+
+            default:
+                throw new \Exception("Invalid Rotate Command");
+                break;
+        }
     }
 
     public function execute(string $command)
@@ -143,10 +190,10 @@ class ToyRobot
                 break;
 
             case 'left':
-                # code...
+                $this->left();
                 break;
             case 'right':
-                # code...
+                $this->right();
                 break;
             case 'report':
                 # code...
