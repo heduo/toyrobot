@@ -15,8 +15,9 @@ class ConsoleTest extends TestCase
    /** @test */
    public function can_read_valid_input_file()
    {
-      $commands = $this->console->readFile();
-       $this->assertIsArray($commands);
+       $this->console->readFile();
+       $this->assertIsArray($this->console->getCommands());
+       $this->assertIsArray($this->console->getSlicedCommands());
    }
 
    /** @test */

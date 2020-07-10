@@ -15,6 +15,7 @@ class Console
 {
     private string $inputFile;
     private array $commands;
+    private array $slicedCommands;
 
     public function __construct() {
         $this->inputFile = __DIR__.'/data/good.input.txt';
@@ -30,7 +31,7 @@ class Console
      *
      * @return array commands array
      */
-    public function readFile(): array
+    public function readFile()
     { 
         if (file_exists($this->inputFile)) {
             $content = trim(file_get_contents($this->inputFile)); // read file and trim its content
@@ -40,13 +41,10 @@ class Console
             $hasPlaceCommand = $this->hasPlaceCommand($content);
 
             if ($hasPlaceCommand!==false) {
-                $commandsArray = preg_split("/(\r\n|\n|\r)/", $content); // split string by new line
-                $commandsArray = array_map(function ($cmd){
-                    return trim($cmd); // trim white space
-                }, $commandsArray);
-                $this->commands = $commandsArray;
+                $this->slicedCommands = $this->stringToCommandsArray(substr($content, $hasPlaceCommand));
+                $this->commands =  $this->stringToCommandsArray($content);
 
-                return $commandsArray;
+                //return $commandsArray;
             }else{
                 throw new NoPlaceCommandException('No PLACE command found');
             }
@@ -63,6 +61,11 @@ class Console
         return $this->commands;
     }
 
+    public function getSlicedCommands():array
+    {
+        return $this->slicedCommands;
+    }
+
     /**
      * check if file content contains PLACE command
      *
@@ -75,11 +78,26 @@ class Console
 
     }
 
-    public function printCommands($commands)
+    public function printCommands(array $commands)
     {
         foreach ($commands as $step  => $command) {
             printf("Command %d : %s \n", $step, $command);
         }
         
+    }
+
+    public function sliceCommandsFromPlace(string $commands)
+    {
+        # code...
+    }
+
+    public function stringToCommandsArray(string $commands):array
+    {
+        $commandsArray = preg_split("/(\r\n|\n|\r)/", $commands); // split string by new line
+        $commandsArray = array_map(function ($cmd){
+            return trim($cmd); // trim white space
+        }, $commandsArray);
+
+        return $commandsArray;
     }
 }
