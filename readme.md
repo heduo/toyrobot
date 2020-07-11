@@ -11,16 +11,17 @@
 git clone https://github.com/heduo/toyrobot.git
 ```
 
-#### 2.2 Install phpunit from composer
+#### 2.2 Install dependencies from composer
 ```
 cd toyrobot
-composer require phpunit/phpunit
+composer install
 ```
 
 #### 2.3 Autoload set up
 ```
 composer dump-autoload -o
 ```
+> Composer PSR-4 Deprecation warning may occur. We can temporarily ignore it 
 
 ## 3. How to Run the app ?
 
@@ -72,3 +73,4 @@ Then run the command below
 |try_far_move.input.txt |try far move and still remain on table top| |Report Output: 5,2,EAST|
 |invalid_command.input.txt | try for invalid command, such as 'UP', 'DOWN'...| InvalidCommandException |    |
 
+> All the Exceptions have been tested in unit tests. However, feel free to place your own input files and have a test
