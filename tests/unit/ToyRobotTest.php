@@ -18,7 +18,7 @@ class ToyRobotTest extends TestCase
    }
 
    /** @test */
-   public function ready_run()
+   public function ready_to_run()
    {
        $commands = $this->robot->getCommands();
        $this->assertIsArray($commands);
@@ -69,15 +69,25 @@ class ToyRobotTest extends TestCase
    }
 
    /** @test */
-   public function can_move_north_based_on_movable_postion()
+   public function can_move_based_on_movable_position()
    {
        $testPos = ['x' => 0, 'y' => 1, 'face' => 'NORTH'];
        $this->robot->setCurrentPosition($testPos);
-       $this->assertEquals($testPos, $this->robot->getCurrentPosition());
        
        $newPos = $this->robot->canMove();
        $expectPos = ['x'=>0, 'y' => 2, 'face' => 'NORTH'];
        $this->assertEquals($expectPos, $newPos);
+   }
+
+   /** @test */
+   public function can_not_move_based_on_unmoveable_position()
+   {
+    $testPos = ['x' => 0, 'y' => 5, 'face' => 'NORTH'];
+    $this->robot->setCurrentPosition($testPos);
+    
+    $canMove = $this->robot->canMove();
+    $this->assertEquals(false, $canMove);
+    $this->assertEquals($testPos, $this->robot->getCurrentPosition()); // current position remain unchanged
    }
 
    /** @test */
@@ -116,10 +126,10 @@ class ToyRobotTest extends TestCase
    public function throw_invalid_command_exception()
    {
     $this->expectException(InvalidCommandException::class);
-    
+
     $testPos = ['x' => 0, 'y' => 1, 'face' => 'NORTH'];
     $this->robot->setCurrentPosition($testPos);
-    $this->robot->execute('UP');
+    $this->robot->execute('UP'); // invalid UP command
    }
 
 }
