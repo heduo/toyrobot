@@ -15,20 +15,24 @@ use App\ToyRobot;
  */
 if (!empty($argv[1])) {
     $inputFile = $default_input_dir."/".$argv[1];
+    $input = $argv[1];
 }else{
     $inputFile = DEFAULT_INPUT_FILE;
+    $input = $defualt_input_name;
 }
 
 // Read file and get commands
 $console = new App\Console($inputFile);
+echo "\n********** Toy Robot Simulator ********** \n";
+echo "\nReading commands from $input ...\n";
 $console->readFile();
 
 // Print all commands
-echo "All commands:\n------------------------\n";
+echo "\nAll commands:\n------------------------\n";
 $console->printCommands($console->getCommands());                                              
 
 // Print sliced commands
-echo "\nSliced commands from 'PLACE':\n------------------------\n";
+echo "\nSliced commands from 1st 'PLACE':\n------------------------\n";
 $slicedCommands = $console->getSlicedCommands();
 $console->printCommands($slicedCommands);
 

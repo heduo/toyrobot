@@ -24,8 +24,6 @@ class Console
        } else{
         $this->inputFile = $file;
        }
-
-       $this->readFile();
     }
 
 
