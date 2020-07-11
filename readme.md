@@ -8,12 +8,12 @@
 #### 2.1 Download from github
 
 ```
-https://github.com/heduo/toyrobot.git
+git clone https://github.com/heduo/toyrobot.git
 ```
 
 #### 2.2 Install phpunit from composer
 ```
-cd toy-robot
+cd toyrobot
 composer require phpunit/phpunit
 ```
 
@@ -27,7 +27,7 @@ composer dump-autoload -o
 First make sure you are in root project directory
 
 ```
-cd toy-robot
+cd toyrobot
 ```
 
 There are two ways to run the app. 
@@ -49,7 +49,7 @@ php public/index.php my_input_file.txt
 First make sure you are in root project directory
 
 ```
-cd toy-robot
+cd toyrobot
 ```
 
 Then run the command below
@@ -59,4 +59,11 @@ Then run the command below
 
 ## 5. Where to change the app configuration ?
 - 'app/config.php'
+
+## 6. Input files for use
+Input folder : "public/input"
+- bad_format.input.csv       
+- default.input.txt (this file should not be removed unless you change the config)
+- empty.input.txt
+- no_place_command.input.txt
 
