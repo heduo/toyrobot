@@ -18,11 +18,14 @@ class Console
     private array $slicedCommands;
 
     public function __construct($file=null) {
+       require_once "config.php";
        if (!$file) {
-        $this->inputFile = __DIR__.'/data/good.input.txt';
+        $this->inputFile = DEFAULT_INPUT_FILE;
        } else{
         $this->inputFile = $file;
        }
+
+       $this->readFile();
     }
 
 
