@@ -9,8 +9,8 @@ use App\Exceptions\InvalidTableSizeException;
 
 class ToyRobot
 {
-    private int $tableSize;
-    private array $commands;
+    private int $tableSize; // default is 5
+    private array $commands; // its first command should be PLACE, otherwise it will throw exception
     private array $currentPosition;
 
     public function __construct(array $commands, $tableSize = 5)
@@ -26,17 +26,22 @@ class ToyRobot
         return $this->commands;
     }
 
-    public function getCurrentPosition()
+    public function getCurrentPosition():array
     {
         return $this->currentPosition;
     }
 
-    public function setCurrentPosition(array $position)
+    public function setCurrentPosition(array $position):void
     {
         $this->currentPosition = $position;
     }
 
-    public function run()
+    /**
+     * Simulate the robot to run commands 
+     *
+     * @return void
+     */
+    public function run():void
     {
         $commands = $this->getCommands();
         // initialise current position with first PLACE command
@@ -48,7 +53,11 @@ class ToyRobot
         }
     }
 
-
+    /**
+     * Check if it's ready to run the commands
+     *
+     * @return boolean
+     */
     public function readyToRun(): bool
     {
         // 1. check if table size is greater than 0
@@ -65,7 +74,8 @@ class ToyRobot
             throw new EmptyCommandsException;
         }
 
-        // 3. check if first command is PLACE command
+        // 3. check if first command is PLACE 
+        // It's designed that commands from input are always sliced already if neccesorry so that the first command is PLACE
         $placePos = strpos(strtolower($this->commands[0]), 'place');
         if ($placePos === false) {
             throw new NoPlaceCommandException;
@@ -74,26 +84,40 @@ class ToyRobot
         return $validTableSize && $notEmptyCommands && ($placePos !== false) ? true : false;
     }
 
+    /**
+     * Execute the first PLACE command
+     *
+     * @param string $command
+     * @return void
+     */
     public function initCurrentPosition(string $command)
     {
         $initPosition = $this->parsePlaceCommand($command);
         $this->currentPosition = $initPosition;
     }
 
-    public function parsePlaceCommand(string $command)
+    /**
+     * Parse valid PLACE command string to postion array 
+     *
+     * @param string $command
+     * @return array position
+     * 
+     * PLACE command format:"int, int, 'EAST'|'WEST'|'SOUTH'|'NORTH'"
+     */
+    public function parsePlaceCommand(string $command):array
     {
-        $cmd = explode(" ", $command);
+        $cmd = explode(" ", $command); 
         if (strtolower($cmd[0]) !== 'place') {
-            throw new BadPlaceCommandFormatException('Not PLACE Command');
+            throw new BadPlaceCommandFormatException();
         }
         $pos = explode(",", $cmd[1]);
         $faces = array("east", "west", "south", "north");
         if (!is_int(intval($pos[0])) || !is_int(intval($pos[1])) || !in_array(strtolower($pos[2]), $faces)) {
-            throw new BadPlaceCommandFormatException($pos[0] . $pos[1] . $pos[2]);
+            throw new BadPlaceCommandFormatException(); 
         }
 
+        // posiiton
         return [
-
             'x' => intval($pos[0]),
             'y' => intval($pos[1]),
             'face' => strtoupper($pos[2]),
@@ -113,7 +137,7 @@ class ToyRobot
     }
 
     /**
-     * Execute MOVE command and update current position
+     * Execute MOVE command to update current position
      *
      * @return void
      */
@@ -125,7 +149,12 @@ class ToyRobot
         }
     }
 
-    public function left()
+    /**
+     * Execute LEFT command
+     *
+     * @return void
+     */
+    public function left():void
     {
         $face = $this->currentPosition['face'];
 
@@ -151,7 +180,12 @@ class ToyRobot
         }
     }
 
-    public function right()
+    /**
+     * Execute RIGHT command
+     *
+     * @return void
+     */
+    public function right():void
     {
         $face = $this->currentPosition['face'];
 
@@ -177,12 +211,23 @@ class ToyRobot
         }
     }
 
-    public function report()
+    /**
+     * Execute REPORT command
+     *
+     * @return void
+     */
+    public function report():void
     {
         $pos = $this->currentPosition;
         printf("\nReport Output: %d,%d,%s\n", $pos['x'], $pos['y'], $pos['face']);
     }
 
+    /**
+     * Execute command
+     *
+     * @param string $command
+     * @return void
+     */
     public function execute(string $command)
     {
         $cmd = explode(' ', $command);
