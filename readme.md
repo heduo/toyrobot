@@ -60,12 +60,15 @@ Then run the command below
 ## 5. Where to change the app configuration ?
 - 'app/config.php'
 
-## 6. Input files for use
-Input folder : "public/input"
-- a.input.txt, b.input.txt, c.input.txt (samples from PROBLEM.md)
-- bad_format.input.csv   (for '.txt' format check)    
-- default.input.txt (this file should not be removed unless you change the config)
-- empty.input.txt (for epmty file check)
-- no_place_command.input.txt (for no PLACE command check)
-- try_far_move.input.txt (try far move and still remain on talbe top)
+## 6. Sample input files
+#### Input files in "public/input"
+| File                                    | Purpose | Expected Exception (if any) |
+| -----                                   | ------- |  -------------- |
+|  a.input.txt, b.input.txt, c.input.txt  | samples from PROBLEM.md  | |
+|bad_format.input.csv | for '.txt' format check|   BadInputFileFormatException          |
+|default.input.txt|default input file| |
+|empty.input.txt | for epmty file check |EmptyFileException |
+|no_place_command.input.txt|for no PLACE command check| NoPlaceCommandException|
+|try_far_move.input.txt |try far move and still remain on table top| |
+|invalid_command.input.txt | try for invalid command, such as 'UP', 'DOWN'...| InvalidCommandException |
 
