@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use App\Exceptions\EmptyCommandsException;
+use App\Exceptions\InvalidCommandException;
 use App\Exceptions\InvalidTableSizeException;
 use App\Exceptions\NoPlaceCommandException;
 use App\ToyRobot;
@@ -109,7 +110,16 @@ class ToyRobotTest extends TestCase
     $testPos = ['x' => 0, 'y' => 1, 'face' => 'NORTH'];
     $this->robot->setCurrentPosition($testPos);
     $this->robot->report();
+   }
+
+   /** @test */
+   public function throw_invalid_command_exception()
+   {
+    $this->expectException(InvalidCommandException::class);
     
+    $testPos = ['x' => 0, 'y' => 1, 'face' => 'NORTH'];
+    $this->robot->setCurrentPosition($testPos);
+    $this->robot->execute('UP');
    }
 
 }

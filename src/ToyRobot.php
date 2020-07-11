@@ -4,6 +4,8 @@ namespace App;
 
 use App\Exceptions\BadPlaceCommandFormatException;
 use App\Exceptions\EmptyCommandsException;
+use App\Exceptions\InvalidCommandException;
+use App\Exceptions\InvalidRotateCommandException;
 use App\Exceptions\NoPlaceCommandException;
 use App\Exceptions\InvalidTableSizeException;
 
@@ -173,10 +175,6 @@ class ToyRobot
             case 'EAST':
                 $this->currentPosition['face'] = "NORTH";
                 break;
-
-            default:
-                throw new \Exception("Invalid Rotate Command");
-                break;
         }
     }
 
@@ -203,10 +201,6 @@ class ToyRobot
                 break;
             case 'EAST':
                 $this->currentPosition['face'] = "SOUTH";
-                break;
-
-            default:
-                throw new \Exception("Invalid Rotate Command");
                 break;
         }
     }
@@ -250,7 +244,7 @@ class ToyRobot
                 $this->report();
                 break;
             default:
-                # code...
+                throw new InvalidCommandException($cmdType."is not a valid command.");
                 break;
         }
     }
