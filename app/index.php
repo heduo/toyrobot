@@ -1,12 +1,12 @@
 <?php
 
 require_once 'config.php';
-
 use App\ToyRobot;
 
 /**
+ *  --- About Input File ----
  *  1. Commands are designed to read from a file
- *  2. Input file is designed to only read within './public/input/' folder
+ *  2. Input file is by default only read within './public/input/' folder
  *  3. Input file name can be passed from command line. 
  *      For example: "php ./public/index.php myinput.txt", it will try to find 'myinput.txt' in './public/input/' folder
  *  4. If no input file is passed from command line, then the default input file is 'default.input.txt'

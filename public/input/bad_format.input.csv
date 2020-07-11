@@ -1,0 +1,18 @@
+    MOVE
+    MOVE
+    LEFT
+    MOVE
+    REPORT
+PLACE 1,2,EAST
+    MOVE
+    MOVE
+    LEFT
+    MOVE
+    REPORT
+PLACE 3,2,EAST
+    MOVE
+    MOVE
+    LEFT
+    MOVE
+    REPORT
+

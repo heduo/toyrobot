@@ -2,17 +2,21 @@
 
 namespace App;
 
+use App\Exceptions\BadInputFileFormatException;
 use App\Exceptions\FileNotExistsException;
 use App\Exceptions\NoPlaceCommandException;
 use App\Exceptions\EmptyFileException;
+use App\Helpers\StringHelper;
 
 
 /**
  * Console class is mainly used for reading input file and parse its content to an commands array
+ * It's normally used before Toy Robot run commands
  */
 
 class Console
 {
+    use StringHelper;
     private string $inputFile;
     private array $commands;
     private array $slicedCommands; // commands starting from 1st PLACE command
@@ -38,8 +42,14 @@ class Console
      */
     public function readFile():void
     { 
-        if (file_exists($this->inputFile)) {
-            $content = trim(file_get_contents($this->inputFile)); // read file and trim its content
+        $inputFile = $this->inputFile;
+        if (file_exists($inputFile)) {
+            // check file format is '.txt'
+            $isTxtFormat = $this->isTxtFormat($inputFile);
+            if ($isTxtFormat!=1) {
+                throw new BadInputFileFormatException('Input file format should be ".txt"');
+            }
+            $content = trim(file_get_contents($inputFile)); // read file and trim its content
             if ($content==='') {
                throw new EmptyFileException('Input file is elmpty.');
             }
@@ -57,6 +67,13 @@ class Console
             
         }
         
+    }
+
+    public function isTxtFormat($file)
+    {
+        $isTxtFormat = $this->endsWith($file, '.txt');
+        return $isTxtFormat;
+
     }
 
     public function getCommands():array

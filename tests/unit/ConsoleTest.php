@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use App\Exceptions\FileNotExistsException;
 use App\Exceptions\NoPlaceCommandException;
 use App\Exceptions\EmptyFileException;
+use App\Exceptions\BadInputFileFormatException;
 
 class ConsoleTest extends TestCase
 {
@@ -54,6 +55,18 @@ class ConsoleTest extends TestCase
        $this->console->setInputFile($no_place_input);
        $this->console->readFile();
        
+   }
+
+   /** 
+    * Should throw BadInputFileFormatException when input file is not in '.txt' format
+    * @test 
+    */
+   public function throw_exception_when_file_format_is_not_correct()
+   {
+       $this->expectException(BadInputFileFormatException::class);
+       $badFile = __DIR__.'/../../public/input/bad_format.input.csv';
+       $this->console->setInputFile($badFile);
+       $this->console->readFile();
    }
 
 }

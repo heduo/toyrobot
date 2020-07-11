@@ -5,10 +5,12 @@ namespace App;
 use App\Exceptions\BadPlaceCommandFormatException;
 use App\Exceptions\EmptyCommandsException;
 use App\Exceptions\InvalidCommandException;
-use App\Exceptions\InvalidRotateCommandException;
 use App\Exceptions\NoPlaceCommandException;
 use App\Exceptions\InvalidTableSizeException;
 
+/**
+ * ToyRobot will run the commands array
+ */
 class ToyRobot
 {
     private int $tableSize; // default is 5
