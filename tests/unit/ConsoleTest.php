@@ -20,7 +20,10 @@ class ConsoleTest extends TestCase
        $this->assertIsArray($this->console->getSlicedCommands());
    }
 
-   /** @test */
+   /** 
+    * Should throw FileNotExistsException when input file does't exist
+    * @test 
+    */
    public function throw_exception_when_input_file_not_exists()
    {
        $this->expectException(FileNotExistsException::class);
@@ -28,7 +31,10 @@ class ConsoleTest extends TestCase
        $this->console->readFile();
    }
 
-   /** @test */
+   /** 
+    * Should throw EmptyFileException when the file is empty
+    * @test 
+    */
    public function throw_exception_when_input_file_is_empty()
    {
     $this->expectException(EmptyFileException::class);
@@ -37,7 +43,10 @@ class ConsoleTest extends TestCase
     $this->console->readFile();
    }
 
-   /** @test */
+   /** 
+    * Should throw NoPlaceCommandException when input file doesn't contain any PLACE command
+    * @test 
+    */
    public function throw_exception_when_input_commands_has_no_place_command()
    {
        $this->expectException(NoPlaceCommandException::class);

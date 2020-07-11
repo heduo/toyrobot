@@ -15,7 +15,7 @@ class Console
 {
     private string $inputFile;
     private array $commands;
-    private array $slicedCommands;
+    private array $slicedCommands; // commands starting from 1st PLACE command
 
     public function __construct($file=null) {
        require_once "config.php";
@@ -26,19 +26,17 @@ class Console
        }
     }
 
-
-
     public function setInputFile(string $file):void
     {
         $this->inputFile = $file;
     }
 
     /**
-     * read input file, process content to an commands array
+     * Read input file, process content , then set commands and sliced commands
      *
-     * @return array commands array
+     * @return void
      */
-    public function readFile()
+    public function readFile():void
     { 
         if (file_exists($this->inputFile)) {
             $content = trim(file_get_contents($this->inputFile)); // read file and trim its content
@@ -91,6 +89,12 @@ class Console
         
     }
 
+    /**
+     * Convert string commands to array
+     *
+     * @param string $commands
+     * @return array
+     */
     public function stringToCommandsArray(string $commands):array
     {
         $commandsArray = preg_split("/(\r\n|\n|\r)/", $commands); // split string by new line

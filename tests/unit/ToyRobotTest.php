@@ -26,7 +26,10 @@ class ToyRobotTest extends TestCase
        $this->assertEquals(true, $readyToRuN);
    }
 
-   /** @test */
+   /** 
+    * Should throw InvalidTableSizeException when table size is 0
+    * @test 
+    */
    public function throw_exception_when_table_size_is_invalid()
    {
        $this->expectException(InvalidTableSizeException::class);
@@ -34,21 +37,30 @@ class ToyRobotTest extends TestCase
        $this->robot = new ToyRobot($commands, 0);
    }
 
-    /** @test */
+    /** 
+     * Should throw EmptyCommandsException when commands is empty
+     * @test 
+     * */
    public function throw_exception_when_commands_is_empty()
    {
        $this->expectException(EmptyCommandsException::class);
        $this->robot = new ToyRobot([]);
    }
 
-   /** @test */
+   /** 
+    * Should throw NoPlaceCommandException when no PLACE found in commands
+    * @test 
+    */
    public function throw_exception_when_no_place_command()
    {
        $this->expectException(NoPlaceCommandException::class);
        $this->robot = new ToyRobot(['MOVE', 'LEFT', 'MOVE']);
    }
 
-   /** @test */
+   /** 
+    * Shoud correctly parse PLACE command string to a postion array
+    * @test 
+    */
    public function parse_correct_format_place_command()
    {
        $placeCommand = 'PLACE 1,2,EAST';
@@ -58,7 +70,10 @@ class ToyRobotTest extends TestCase
        $this->assertEquals($expect, $cmd);
    }
 
-   /** @test */
+   /** 
+    * Can initialise current position with valid PLACE command
+    * @test
+    */
    public function can_init_current_position_with_correct_format_place_command()
    {
     $placeCommand = 'PLACE 1,2,EAST';
@@ -68,7 +83,10 @@ class ToyRobotTest extends TestCase
     $this->assertEquals(['x' => 1, 'y' => 2, 'face' => 'EAST'], $currentPosition);
    }
 
-   /** @test */
+   /** 
+    * Can move based on a moveable position
+    * @test 
+    */
    public function can_move_based_on_movable_position()
    {
        $testPos = ['x' => 0, 'y' => 1, 'face' => 'NORTH'];
@@ -79,8 +97,11 @@ class ToyRobotTest extends TestCase
        $this->assertEquals($expectPos, $newPos);
    }
 
-   /** @test */
-   public function can_not_move_based_on_unmoveable_position()
+   /** 
+    * Should remain still if try to move from an unmovable postion
+    * @test 
+    */
+   public function can_not_move_based_on_unmovable_position()
    {
     $testPos = ['x' => 0, 'y' => 5, 'face' => 'NORTH'];
     $this->robot->setCurrentPosition($testPos);
@@ -122,7 +143,10 @@ class ToyRobotTest extends TestCase
     $this->robot->report();
    }
 
-   /** @test */
+   /** 
+    * Should throw InvalidCommandException when execute invalid command 'UP'
+    * @test 
+    */
    public function throw_invalid_command_exception()
    {
     $this->expectException(InvalidCommandException::class);
