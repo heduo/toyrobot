@@ -37,7 +37,7 @@ The default file is **'public/input/default.input.txt'** if you don't specify th
 php public/index.php
 ```
 
-#### 3.2 Run with its own default input file
+#### 3.2 Run with your own input file
 The default input folder is **'public/input'**, after you add your own input file in that folder, run the command following below format
 
 ```
