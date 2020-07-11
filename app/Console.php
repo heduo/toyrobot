@@ -22,9 +22,9 @@ class Console
     private array $slicedCommands; // commands starting from 1st PLACE command
 
     public function __construct($file=null) {
-       require_once "config.php";
+       $config = include('config.php');
        if (!$file) {
-        $this->inputFile = DEFAULT_INPUT_FILE;
+        $this->inputFile = $config['input_file'];
        } else{
         $this->inputFile = $file;
        }

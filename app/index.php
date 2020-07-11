@@ -1,7 +1,8 @@
 <?php
 
-require_once 'config.php';
 use App\ToyRobot;
+
+$config = include('config.php');
 
 /**
  *  --- About Input File ----
@@ -14,11 +15,11 @@ use App\ToyRobot;
  * 
  */
 if (!empty($argv[1])) {
-    $inputFile = $default_input_dir."/".$argv[1]; // get input file from command line
+    $inputFile =  $config['input_dir']."/".$argv[1]; // get input file from command line
     $input = $argv[1];
 }else{
-    $inputFile = DEFAULT_INPUT_FILE; // defualt input file
-    $input = $defualt_input_name;
+    $inputFile = $config['input_file']; // defualt input file
+    $input = $config['input_file_name'];
 }
 
 // Read file and get commands
