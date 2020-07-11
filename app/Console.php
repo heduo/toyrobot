@@ -17,9 +17,15 @@ class Console
     private array $commands;
     private array $slicedCommands;
 
-    public function __construct() {
+    public function __construct($file=null) {
+       if (!$file) {
         $this->inputFile = __DIR__.'/data/good.input.txt';
+       } else{
+        $this->inputFile = $file;
+       }
     }
+
+
 
     public function setInputFile(string $file):void
     {
@@ -93,4 +99,6 @@ class Console
 
         return $commandsArray;
     }
+
+    
 }

@@ -32,7 +32,7 @@ class ConsoleTest extends TestCase
    public function throw_exception_when_input_file_is_empty()
    {
     $this->expectException(EmptyFileException::class);
-    $empty_file =  dirname(dirname(__DIR__)).'/src/data/empty.input.txt';
+    $empty_file =  __DIR__.'/../../app/data/empty.input.txt';
     $this->console->setInputFile($empty_file);
     $this->console->readFile();
    }
@@ -41,11 +41,10 @@ class ConsoleTest extends TestCase
    public function throw_exception_when_input_commands_has_no_place_command()
    {
        $this->expectException(NoPlaceCommandException::class);
-       $no_place_input =  dirname(dirname(__DIR__)).'/src/data/no_place_command.input.txt';
+       $no_place_input =   __DIR__.'/../../app/data/no_place_command.input.txt';
        $this->console->setInputFile($no_place_input);
        $this->console->readFile();
        
    }
-
 
 }

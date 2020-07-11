@@ -1,8 +1,7 @@
 <?php
 
-use App\ToyRobot;
+use App\ToyRobot;HR
 
-require_once dirname(__DIR__).'/vendor/autoload.php';
 
 // Read file and get commands
 $console = new App\Console;
