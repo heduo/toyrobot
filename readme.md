@@ -62,13 +62,13 @@ Then run the command below
 
 ## 6. Sample input files
 #### Input files in "public/input"
-| File                                    | Purpose | Expected Exception (if any) |
-| -----                                   | ------- |  -------------- |
-|  a.input.txt, b.input.txt, c.input.txt  | samples from PROBLEM.md  | |
-|bad_format.input.csv | for '.txt' format check|   BadInputFileFormatException          |
-|default.input.txt|default input file| |
-|empty.input.txt | for epmty file check |EmptyFileException |
-|no_place_command.input.txt|for no PLACE command check| NoPlaceCommandException|
-|try_far_move.input.txt |try far move and still remain on table top| |
-|invalid_command.input.txt | try for invalid command, such as 'UP', 'DOWN'...| InvalidCommandException |
+| File                                    | Purpose | Expected Exception (if any) | Expected REPORT Output |
+| -----                                   | ------- |  -------------- | -----------------                 | 
+|  a.input.txt, b.input.txt, c.input.txt  | samples from PROBLEM.md  | |          see PROBLEM.md          |
+|bad_format.input.csv | for '.txt' format check|   BadInputFileFormatException          |   |
+|default.input.txt|default input file| |Report Output: 3,3,NORTH Report Output: 5,3,NORTH |
+|empty.input.txt | for epmty file check |EmptyFileException |   |
+|no_place_command.input.txt|for no PLACE command check| NoPlaceCommandException|    |
+|try_far_move.input.txt |try far move and still remain on table top| |Report Output: 5,2,EAST|
+|invalid_command.input.txt | try for invalid command, such as 'UP', 'DOWN'...| InvalidCommandException |    |
 
